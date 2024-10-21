@@ -1,39 +1,18 @@
-// src/App.js
-import React, { useState } from "react";
-import ListarUsuarios from "./components/ListarUsuarios";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
 import FormularioUsuarios from "./components/FormularioUsuarios";
 
 export const App = () => {
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
-
-  const handleAgregar = () => {
-    setUsuarioSeleccionado(null);
-    setMostrarFormulario(true);
-  };
-
-  const handleEditar = (usuario) => {
-    setUsuarioSeleccionado(usuario);
-    setMostrarFormulario(true);
-  };
-
-  const handleGuardar = () => {
-    setMostrarFormulario(false);
-  };
-
   return (
-    <div className="App">
-      {mostrarFormulario ? (
-        <FormularioUsuarios
-          usuarioSeleccionado={usuarioSeleccionado}
-          onGuardar={handleGuardar}
-        />
-      ) : (
-        <ListarUsuarios
-          onEdit={handleEditar}
-          onAdd={handleAgregar}
-        />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/usuarios/agregar" element={<FormularioUsuarios />} />
+        
+
+      </Routes>
+    </Router>
   );
 };
